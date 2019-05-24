@@ -10,10 +10,16 @@ TODO:
 - do we want to implement ramsey discounting, i.e. offer the eta keyword argument as well? 
 - should marginal damages be a step function across the ten year timesteps to be used by the SCC? or should I lineraly interpolate to get annual marginal emissions?
 """
-function compute_scc(m::Model=get_model(); year::Union{Int, Nothing} = nothing, last_year::Int = model_years[end], prtp::Float64 = 0.03)
+function compute_scc(m::Model=get_model(); year::Union{Int, Nothing} = nothing, last_year::Int = model_years[end], prtp::Float64 = 0.015, temporal_inequality_aversion::Float64=1.45)
     year === nothing ? error("Must specify an emission year. Try `compute_scc(m, year=2015)`.") : nothing
     !(last_year in model_years) ? error("Invlaid value of $last_year for last_year. last_year must be within the model's time index $model_years.") : nothing
     !(year in model_years[1]:10:last_year) ? error("Cannot compute the scc for year $year, year must be within the model's time index $(model_years[1]):10:$last_year.") : nothing
+
+    add_comp!(m, anthoff_emmerling_welfare)
+    connect_param!(m, :anthoff_emmerling_welfare, :CPC, :neteconomy, :CPC)
+    connect_param!(m.md, :anthoff_emmerling_welfare, :l, :l)
+    set_param!(m, :anthoff_emmerling_welfare, :prtp, prtp)
+    set_param!(m, :anthoff_emmerling_welfare, :temporal_inequality_aversion, temporal_inequality_aversion)
 
     mm = get_marginal_model(m; year = year)
 
@@ -44,10 +50,12 @@ function _compute_scc(mm::MarginalModel; year::Int, last_year::Int, prtp::Float6
     ntimesteps = findfirst(isequal(last_year), model_years)     # Will run through the timestep of the specified last_year 
     run(mm, ntimesteps=ntimesteps)
 
-    marginal_damages = -1 * mm[:neteconomy, :C][1:ntimesteps] * 12/44 * 10^2     # consumption is in trillions$, so *10^12, but pulse is in GtC for ten years, so *10^-9 *10^-1
+    time = Mimi.dimension(mm.base, :time)
 
-    df = [zeros(length(model_years[1]:10:year)-1)..., [1/(1+prtp)^(t-year) for t in year:10:last_year]...]
-    scc = sum(df .* marginal_damages * 10)  # currently implemented as a 10year step function; so each timestep of discounted marginal damages is multiplied by 10
+    # We need to take the negative to convert from impact to damage
+    scc_in_welfare_units = -mm[:anthoff_emmerling_welfare, :total_welfare] * 12 / 44
+    scc = scc_in_welfare_units / mm.base[:anthoff_emmerling_welfare, :marginal_welfare][time[year]]
+
     return scc
 end
 
@@ -61,7 +69,7 @@ function get_marginal_model(m::Model=get_model(); year::Union{Int, Nothing} = no
     year === nothing ? error("Must specify an emission year. Try `get_marginal_model(m, year=2015)`.") : nothing
     !(year in model_years) ? error("Cannot add marginal emissions in $year, year must be within the model's time index $(model_years[1]):10:$last_year.") : nothing
 
-    mm = create_marginal_model(m)
+    mm = create_marginal_model(m, 10.0^10)
     add_marginal_emissions!(mm.marginal, year)
 
     return mm

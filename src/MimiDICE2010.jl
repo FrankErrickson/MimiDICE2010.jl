@@ -15,6 +15,7 @@ include("components/sealevelrise_component.jl")
 include("components/damages_component.jl")
 include("components/neteconomy_component.jl")
 include("components/welfare_component.jl")
+include("components/AEwelfare.jl")
 
 export construct_dice
 
