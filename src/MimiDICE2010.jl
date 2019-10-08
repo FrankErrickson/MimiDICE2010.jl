@@ -250,7 +250,7 @@ function get_model_scc(p; year::Union{Int, Nothing})
     m = Model()
     set_dimension!(m, :time, model_years)
 
-    add_comp!(m, SCC_composite)  # SCC_composite composite component defined in src/components/composites/DICE2010.jl 
+    add_comp!(m, SCC_composite)  # SCC_composite composite component defined in src/components/composites/SCC_composite.jl 
 
     # Add the pulse of emissions
     time = Mimi.dimension(m, :time)
