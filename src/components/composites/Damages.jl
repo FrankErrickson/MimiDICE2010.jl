@@ -7,13 +7,13 @@
     component(welfare)
 
     # Resolve parameter namespace collisions
-    YGROSS = damages.YGROSS, neteconomy.YGROSS
+    YGROSS = Parameter(damages.YGROSS, neteconomy.YGROSS)
 
     # Make internal connections
-    neteconomy.DAMFRAC = damages.DAMFRAC
-    welfare.CPC = neteconomy.CPC
+    connect(neteconomy.DAMFRAC, damages.DAMFRAC)
+    connect(welfare.CPC, neteconomy.CPC)
 
     # Export variables
-    I = neteconomy.I 
+    I = Variable(neteconomy.I)
     
 end

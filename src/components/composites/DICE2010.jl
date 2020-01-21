@@ -15,10 +15,10 @@
     component(Damages)
 
     # Make internal connections
-    Climate.E = SocioEconomics.E
-    Damages.YGROSS = SocioEconomics.YGROSS
-    Damages.TATM = Climate.TATM
-    Damages.TotSLR = Climate.TotSLR
-    SocioEconomics.I = Damages.I
+    connect(Climate.E, SocioEconomics.E)
+    connect(Damages.YGROSS, SocioEconomics.YGROSS)
+    connect(Damages.TATM, Climate.TATM)
+    connect(Damages.TotSLR, Climate.TotSLR)
+    connect(SocioEconomics.I, Damages.I)
 
 end

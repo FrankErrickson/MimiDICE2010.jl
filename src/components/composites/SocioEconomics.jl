@@ -6,10 +6,10 @@
     component(emissions)
 
     # Make internal connections between child components
-    emissions.YGROSS = grosseconomy.YGROSS
+    connect(emissions.YGROSS, grosseconomy.YGROSS)
 
     # Export variables
-    YGROSS = grosseconomy.YGROSS
-    E = emissions.E
+    YGROSS = Variable(grosseconomy.YGROSS)
+    E = Variable(emissions.E)
 
 end
