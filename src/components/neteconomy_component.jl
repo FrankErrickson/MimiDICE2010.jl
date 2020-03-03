@@ -34,11 +34,9 @@
         #Define function for C
         if is_first(t)
             v.C[t] = v.Y[t] - v.I[t] + 0.1
-        #TODO: change to a non-t.t access when porting to 1.0
-        elseif t.t < 60
+        elseif t < TimestepIndex(60)
             v.C[t] = v.Y[t] - v.I[t]
-        #TODO: change to is_timestep(t, 60) when porting to 1.0
-        elseif t.t == 60
+        elseif t == TimestepIndex(60)
             v.C[t] = v.C[t-1]
         end
 
@@ -46,8 +44,7 @@
         v.CPC[t] = 1000 * v.C[t] / p.l[t]
 
         #Define function for CPRICE
-         #TODO: change to is_timestep(t, 26) when porting to 1.0
-        if t.t == 26
+        if t == TimestepIndex(26)
             v.CPRICE[t] = v.CPRICE[t-1]
         else
             v.CPRICE[t] = p.pbacktime[t] * 1000 * p.MIU[t] ^ (p.expcost2 - 1)

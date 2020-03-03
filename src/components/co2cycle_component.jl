@@ -26,8 +26,8 @@
 
             v.ML[t] = p.ml0
 
-            v.MAT[1] = p.mat0
-            v.MAT[2] = p.mat1
+            v.MAT[TimestepIndex(1)] = p.mat0
+            v.MAT[TimestepIndex(2)] = p.mat1
 
         else      
 

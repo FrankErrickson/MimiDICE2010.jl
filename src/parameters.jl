@@ -49,8 +49,8 @@ function dice2010_excel_parameters(filename=datafile; nsteps=nothing)
     # Emissions parameters
     p[:sigma]   = read_params(f, "B46:BI46", nsteps)
     p[:etree]   = read_params(f, "B52:BI52", nsteps)
-    p[:miubase] = read_params(f, "B133:BI133", nsteps)         # emissions control rate
-    p[:savebase]= read_params(f, "B132:BI132", nsteps) / 100   # savings rate
+    p[:MIU]     = read_params(f, "B133:BI133", nsteps)         # emissions control rate
+    p[:S]       = read_params(f, "B132:BI132", nsteps) / 100   # savings rate
 
     # Carbon cycle
     p[:mat0]    = read_params(f, "B57")   # Initial Concentration in atmosphere 2000 (GtC)
@@ -105,9 +105,9 @@ function dice2010_excel_parameters(filename=datafile; nsteps=nothing)
 
     # SLR Parameters
 
-    p[:slrcoeff]    = read_params(f, "B51", sheet="Parameters")
-    p[:slrcoeffsq]  = read_params(f, "B52", sheet="Parameters")
-    p[:slrexp]      = read_params(f, "B53", sheet="Parameters")
+    p[:b1]          = read_params(f, "B51", sheet="Parameters")
+    p[:b2]          = read_params(f, "B52", sheet="Parameters")
+    p[:b3]          = read_params(f, "B53", sheet="Parameters")
 
     p[:therm0]      = read_params(f, "B178") # meters above 2000
     p[:gsic0]       = read_params(f, "B179")
