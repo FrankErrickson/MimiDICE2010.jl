@@ -2,9 +2,9 @@
 @defcomposite Damages begin
 
     # Add child components
-    component(damages)
-    component(neteconomy)
-    component(welfare)
+    Component(damages)
+    Component(neteconomy)
+    Component(welfare)
 
     # Resolve parameter namespace collisions
     YGROSS = Parameter(damages.YGROSS, neteconomy.YGROSS)

@@ -10,9 +10,9 @@
 @defcomposite DICE2010 begin
 
     # Add child components
-    component(SocioEconomics)
-    component(Climate)
-    component(Damages)
+    Component(SocioEconomics)
+    Component(Climate)
+    Component(Damages)
 
     # Make internal connections
     connect(Climate.E, SocioEconomics.E)

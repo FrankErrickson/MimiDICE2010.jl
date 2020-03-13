@@ -2,10 +2,10 @@
 @defcomposite Climate begin
 
     # Add child components
-    component(co2cycle)
-    component(radiativeforcing)
-    component(climatedynamics) 
-    component(sealevelrise)
+    Component(co2cycle)
+    Component(radiativeforcing)
+    Component(climatedynamics) 
+    Component(sealevelrise)
 
     # Resolve parameter name collisions
     fco22x = Parameter(radiativeforcing.fco22x, climatedynamics.fco22x)

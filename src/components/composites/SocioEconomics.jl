@@ -2,8 +2,8 @@
 @defcomposite SocioEconomics begin
 
     # Add child components
-    component(grosseconomy) 
-    component(emissions)
+    Component(grosseconomy) 
+    Component(emissions)
 
     # Make internal connections between child components
     connect(emissions.YGROSS, grosseconomy.YGROSS)

@@ -18,10 +18,10 @@ end
 @defcomposite SCC_composite begin
 
     # Add child components
-    component(DICE2010, :base)
-    component(adder, :CO2_pulse)    # does this need to be added before the marginal composite?
-    component(DICE2010, :marginal)
-    component(SCC_calculation)
+    Component(DICE2010, :base)
+    Component(adder, :CO2_pulse)    # does this need to be added before the marginal composite?
+    Component(DICE2010, :marginal)
+    Component(SCC_calculation)
 
     # Resolve parameter namespace collisions
     #   TBD: this would error for all DICE2010 external parameters because "base" and "marginal" are the same
