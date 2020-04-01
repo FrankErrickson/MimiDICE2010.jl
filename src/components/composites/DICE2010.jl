@@ -14,6 +14,10 @@
     Component(Climate)
     Component(Damages)
 
+    # Resolve parameter namespace collisions
+    l = Parameter(SocioEconomics.l, Damages.l)
+    MIU = Parameter(SocioEconomics.MIU, Damages.MIU)
+
     # Make internal connections
     connect(Climate.E, SocioEconomics.E)
     connect(Damages.YGROSS, SocioEconomics.YGROSS)

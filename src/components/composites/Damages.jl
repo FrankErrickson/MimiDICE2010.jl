@@ -8,6 +8,7 @@
 
     # Resolve parameter namespace collisions
     YGROSS = Parameter(damages.YGROSS, neteconomy.YGROSS)
+    l = Parameter(neteconomy.l, welfare.l)
 
     # Make internal connections
     connect(neteconomy.DAMFRAC, damages.DAMFRAC)
