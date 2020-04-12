@@ -92,7 +92,9 @@ function get_model_default(params_dict)
     return m
 end
 
-function get_model_composite(params_dict)
+function get_model_composite(params_dict=nothing)
+
+    params_dict = params_dict == nothing ? dice2010_excel_parameters() : params_dict
 
     m = Model()
     set_dimension!(m, :time, model_years)
