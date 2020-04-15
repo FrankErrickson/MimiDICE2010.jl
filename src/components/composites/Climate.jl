@@ -17,7 +17,8 @@
     connect(sealevelrise.TATM, climatedynamics.TATM)
 
     # Export variables
-    TATM = Variable(climatedynamics.TATM)
-    TotSLR = Variable(sealevelrise.TotSLR)
-
+    TATM    = Variable(climatedynamics.TATM)
+    TotSLR  = Variable(sealevelrise.TotSLR)
+    MAT     = Variable(co2cycle.MAT)
+    
 end

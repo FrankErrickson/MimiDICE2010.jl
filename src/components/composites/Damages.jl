@@ -15,6 +15,9 @@
     connect(welfare.CPC, neteconomy.CPC)
 
     # Export variables
-    I = Variable(neteconomy.I)
+    I       = Variable(neteconomy.I)
+    DAMFRAC = Variable(damages.DAMFRAC)
+    CPC     = Variable(welfare.CPC)
+    UTILITY = Variable(welfare.UTILITY)
     
 end

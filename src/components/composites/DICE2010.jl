@@ -25,4 +25,15 @@
     connect(Damages.TotSLR, Climate.TotSLR)
     connect(SocioEconomics.I, Damages.I)
 
+    # Export the main variables of interest
+    YGROSS  = Variable(SocioEconomics.YGROSS)
+    E       = Variable(SocioEconomics.E)
+    MAT     = Variable(Climate.MAT)
+    TATM    = Variable(Climate.TATM)
+    TotSLR  = Variable(Climate.TotSLR)
+    DAMFRAc = Variable(Damages.DAMFRAC)
+    CPC     = Variable(Damages.CPC)
+    UTILITY = Variable(Damages.UTILITY)
+    
+
 end
