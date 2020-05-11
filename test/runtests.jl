@@ -262,6 +262,15 @@ result = MimiDICE2010.compute_scc_mm(year=2035)
 
 end
 
-end #mimi-dice-2010 testset
+#------------------------------------------------------------------------------
+#   5. Validate Composite Model against Flat Model
+#------------------------------------------------------------------------------
+@testset "composite validation" begin 
+
+include("test_composite_validation.jl")
+
+end # composite validation testset
+
+end # mimi-dice-2010 testset
 
 nothing
