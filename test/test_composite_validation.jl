@@ -25,3 +25,18 @@ Precision = 1.0e-11
 @test maximum(m_comp[:DICE2010, :DAMFRAC] - m_flat[:neteconomy, :DAMFRAC]) ≈ 0. atol = Precision 
 @test maximum(m_comp[:DICE2010, :CPC] - m_flat[:welfare, :CPC]) ≈ 0. atol = Precision
 @test maximum(m_comp[:DICE2010, :UTILITY] - m_flat[:welfare, :UTILITY]) ≈ 0. atol = Precision
+
+# Check all values in the namespace
+
+for comp in keys(m_flat.md.namespace) # namespace of all components
+    for datum in keys(m_flat.md[comp].namespace) # namespace of component
+        # println("Checking component $comp datum $datum")
+        if in(datum, keys(m_comp.md[:DICE2010].namespace))
+            # println("Found in composite comp namespace")
+            @test maximum(m_comp[:DICE2010, datum] - m_flat[comp, datum]) ≈ 0. atol = Precision
+        else
+            # println("Skipping, not found in composite comp namespace")
+        end
+
+    end
+end
