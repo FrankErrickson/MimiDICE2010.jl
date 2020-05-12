@@ -31,7 +31,7 @@
     MAT     = Variable(Climate.MAT)
     TATM    = Variable(Climate.TATM)
     TotSLR  = Variable(Climate.TotSLR)
-    DAMFRAc = Variable(Damages.DAMFRAC)
+    DAMFRAC = Variable(Damages.DAMFRAC)
     CPC     = Variable(Damages.CPC)
     UTILITY = Variable(Damages.UTILITY)
     
