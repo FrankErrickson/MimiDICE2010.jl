@@ -4,7 +4,7 @@ m_comp = MimiDICE2010.get_model(variant=:COMPOSITE )
 run(m_flat)
 run(m_comp)
 
-# for now chck the main variables of interest
+# check the main variables of interest
 #   # Export the main variables of interest
 #   YGROSS  = Variable(SocioEconomics.YGROSS)
 #   E       = Variable(SocioEconomics.E)
@@ -27,7 +27,6 @@ Precision = 1.0e-11
 @test maximum(m_comp[:DICE2010, :UTILITY] - m_flat[:welfare, :UTILITY]) ≈ 0. atol = Precision
 
 # Check all values in the namespace
-
 for comp in keys(m_flat.md.namespace) # namespace of all components
     for datum in keys(m_flat.md[comp].namespace) # namespace of component
         # println("Checking component $comp datum $datum")
